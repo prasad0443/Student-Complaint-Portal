@@ -1,0 +1,33 @@
+# Render Blueprint (FREE tier) — https://render.com/docs/blueprint-spec
+# Only MONGODB_URI is required. Everything else has sensible defaults.
+services:
+  - type: web
+    name: student-complaint-portal
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: bash scripts/render-build.sh
+    startCommand: npm start --prefix server
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: true
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false
+      # local = $0 extra (attachments lost on redeploy). Switch to s3 + R2 for persistence.
+      - key: STORAGE_PROVIDER
+        value: local
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false

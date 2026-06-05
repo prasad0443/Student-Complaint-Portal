@@ -1,0 +1,13 @@
+node_modules
+**/node_modules
+.git
+.env
+**/.env
+server/uploads/*
+!server/uploads/.gitkeep
+client/dist
+*.md
+!README.md
+!DEPLOYMENT.md
+.cursor
+agent-transcripts
